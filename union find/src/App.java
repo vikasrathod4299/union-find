@@ -2,31 +2,36 @@ public class App {
 
     public static class unionFind
     {
-            private int[] id;
+            private int[] idc;
             public unionFind(int n)
             {
-                id=new int[n];
+                idc=new int[n];
                 for(int i=0;i<n;i++)
                 {
-                    id[i]=i;
+                    idc[i]=i;
                 }
 
+            }
+
+            private int root(int i)
+            {
+            	while (i!=idc[i])
+            	{
+            		i=idc[i];
+            	}
+            	return i;
             }
 
             public boolean connected(int p,int q)
             {
-                return id[p]==id[q];
+                return root(p)==root(q);
             }
 
             public void union(int p, int q)
             {
-                for(int i=0;i<id.length;i++)
-                {
-                    if (id[i]==id[p])
-                    {
-                        id[i]=id[q];
-                    }
-                }
+                int i=root(p);
+                int j=root(q);
+                idc[i]=j;
             }
     }
     public static void main(String[] args) throws Exception 
@@ -34,10 +39,10 @@ public class App {
         unionFind uf = new unionFind(10);
         uf.union(2, 3);
         uf.union(3, 9);
-        System.out.print(uf.connected(2, 9));
+        uf.union(1,0);
+        uf.union(0,2);
 
-
-
+        System.out.print(uf.connected(1, 3));
 
     }
 }
