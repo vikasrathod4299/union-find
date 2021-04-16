@@ -3,12 +3,17 @@ public class App {
     public static class unionFind
     {
             private int[] idc;
+            private int[] sz;
+
             public unionFind(int n)
             {
                 idc=new int[n];
+                sz=new int[n];
+
                 for(int i=0;i<n;i++)
                 {
                     idc[i]=i;
+                   	sz[i]=1;
                 }
 
             }
@@ -31,7 +36,15 @@ public class App {
             {
                 int i=root(p);
                 int j=root(q);
-                idc[i]=j;
+                if (sz[i]<sz[j])
+                	{
+                		idc[i]=j;
+                		sz[j]+=sz[i];
+                	}
+                else{
+                	idc[j]=i;
+                	sz[i]+=sz[j];
+                }
             }
     }
     public static void main(String[] args) throws Exception 
