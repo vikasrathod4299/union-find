@@ -22,6 +22,7 @@ public class App {
             {
             	while (i!=idc[i])
             	{
+            		idc[i]=idc[idc[i]];
             		i=idc[i];
             	}
             	return i;
